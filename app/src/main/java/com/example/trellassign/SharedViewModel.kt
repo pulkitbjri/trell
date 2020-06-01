@@ -16,6 +16,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     var switchFragment = MutableLiveData<String>() //1,2,3 for screens respectively
     var pickerBtnClicked = MutableLiveData<Boolean>()
     var progressLiveData = MutableLiveData<Boolean>()
+    var compressionStatus = MutableLiveData<String>()
 
 
 
@@ -83,11 +84,15 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            if (file==null)
-                return
-            convertedFilePath.value=file
             progressLiveData.value=false
-            setSwitchFrag("2")
+            if (file==null)
+            {
+                compressionStatus.value="failed to compress..."
+                return
+            }
+            compressionStatus.value="Sucess"
+            convertedFilePath.value=file
+            setSwitchFrag("3")
         }
 
     }

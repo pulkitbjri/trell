@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeFragment(it: String) {
         val fragment= if (it=="2") Screen2.newInstance()
-        else  Screen3.newInstance()
+                        else Screen3.newInstance()
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.container, fragment)
         fragmentTransaction.commit()

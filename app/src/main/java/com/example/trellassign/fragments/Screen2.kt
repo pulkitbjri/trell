@@ -52,9 +52,6 @@ class Screen2 : Fragment() {
     }
 
     private fun setVideoView() {
-//        val conrtoller = MediaController(context)
-//        conrtoller.setAnchorView(videoView)
-//        videoView.setMediaController(conrtoller)
         videoView.setVideoURI(viewmodel.getFilePathUri())
         videoView.start()
     }
@@ -74,8 +71,15 @@ class Screen2 : Fragment() {
             binding.bitRate.text.toString()
         )
         binding.compress.isEnabled=false
-
+        observeCompressopn()
     }
+
+    private fun observeCompressopn() {
+        viewmodel.compressionStatus.observe(viewLifecycleOwner, Observer {
+            Toast.makeText(requireContext(),it,Toast.LENGTH_LONG).show()
+        })
+    }
+
     fun getBitRate(url: Uri?): Int {
         val mmr = MediaMetadataRetriever()
         return try {
